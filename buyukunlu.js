@@ -1,38 +1,27 @@
 function buyukUnlu(word) {
-  word = word.toLowerCase();
-  console.log(word);
-  var ince = ["e", "i", "ü", "ö"];
-  var kalin = ["a", "o", "u", "ı"];
-  var array = word.split("");
-  var sesliTuru = "";
-  for (const a of array) {
-    if (ince.includes(a) || kalin.includes(a)) {
-      if (sesliTuru == "") {
-        if (ince.includes(a)) {
-          sesliTuru = "ince";
-          continue;
-        }
-        if (kalin.includes(a)) {
-          sesliTuru = "kalin";
-          continue;
-        }
-      } else {
-        if (sesliTuru == "ince") {
-          if (!ince.includes(a)) {
-            console.log(sesliTuru);
-            console.log(a);
-            return false;
-          }
-        }
-        if (sesliTuru == "kalin") {
-          if (!kalin.includes(a)) {
-            console.log(sesliTuru);
-            console.log(a);
-            return false;
-          }
-        }
-      }
+  let kalinSayisi = 0;
+  let inceSayisi = 0;
+  let kalin = ["a", "ı", "o", "u"];
+  let ince = ["e", "i", "ö", "ü"];
+  let harfler = word.split("");
+
+  for (const harf of harfler) {
+    if (kalin.includes(harf)) {
+      kalinSayisi += 1;
+      continue;
+    }
+    if (ince.includes(harf)) {
+      inceSayisi += 1;
+      continue;
     }
   }
-  return true;
+
+  if (inceSayisi > 0 && kalinSayisi > 0) {
+    alert("büyük ünlü uyumuna uyulmamıştır");
+  } else if (inceSayisi > 0 && kalinSayisi == 0) {
+    alert("büyük ünlü uyumuna uyulmuştur");
+  } else if (inceSayisi == 0 && kalinSayisi > 0) {
+    alert("büyük ünlü uyumuna uyulmuştur");
+  }
 }
+
