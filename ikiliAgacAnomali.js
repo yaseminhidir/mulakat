@@ -25,35 +25,34 @@ var duzgunAgac = {
 };
 
 var bozukAgacYaprak2 = {
-left: null,
+  left: null,
 
-right: null,
+  right: null,
 };
 bozukAgacYaprak2.left = bozukAgacYaprak2;
 
-function agacKontrol(agac, dahil = [], parent = null) {
-if (agac == null) {
-  return true;
-}
-if (dahil.includes(agac)) {
-  return false;
-}
-if (agac == parent) {
-  return false;
-}
-// recursive
-var solDogruluk = agacKontrol(agac.left, dahil, agac);
-console.log(agac);
-if (!solDogruluk) {
-  return false;
-}
-var sagDogruluk = agacKontrol(agac.right, dahil, agac);
+function agacKontrol(agac, dahil = []) {
+  if (agac == null) {
+    return true;
+  }
+  if (dahil.includes(agac)) {
+    return false;
+  }
+  dahil.push(agac);
 
-if (!sagDogruluk) {
-  return false;
-}
-dahil.push(agac);
-return true;
+  // recursive
+  var solDogruluk = agacKontrol(agac.left, dahil);
+  console.log(agac);
+  if (!solDogruluk) {
+    return false;
+  }
+  var sagDogruluk = agacKontrol(agac.right, dahil);
+
+  if (!sagDogruluk) {
+    return false;
+  }
+
+  return true;
 }
 console.log("Bozuk Agac Sonuc : ", agacKontrol(bozukAgacYaprak2)); // false demeli
 console.log("Duzdun Agac Sonuc : ", agacKontrol(duzgunAgac)); // true demeli
